@@ -7,6 +7,7 @@ import { HeaderComponent } from './components/header/header.component';
 import { ButtonComponent } from './components/button/button.component';
 import { ShipmentComponent } from './components/shipment/shipment.component';
 import { ShipmentItemComponent } from './components/shipment-item/shipment-item.component';
+import { FormComponent } from './components/form/form.component';
 
 @NgModule({
   declarations: [
@@ -14,7 +15,8 @@ import { ShipmentItemComponent } from './components/shipment-item/shipment-item.
     HeaderComponent,
     ButtonComponent,
     ShipmentComponent,
-    ShipmentItemComponent
+    ShipmentItemComponent,
+    FormComponent
   ],
   imports: [
     BrowserModule,
