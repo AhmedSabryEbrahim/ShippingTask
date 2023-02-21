@@ -6,5 +6,5 @@ export interface Shipment{
     streetAdress: string;
     country: string;
     town: string;
-    deliveryDate: Date;
+    deliveryDate: String;
 }

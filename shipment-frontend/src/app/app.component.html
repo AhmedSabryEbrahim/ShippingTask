@@ -1,6 +1,4 @@
 <div class="container">
-  <app-form></app-form>
-  <app-header></app-header>
-  <app-shipment></app-shipment>
-
+  <app-form (submitEventEmitter)="addShipmentRecordToTable($event)"></app-form>
+  <app-shipment-item [dataSource]="shipments"></app-shipment-item>
 </div>

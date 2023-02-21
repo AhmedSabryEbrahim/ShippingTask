@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { SHIPMENTS } from './components/mock-shipments';
+import { Shipment } from './components/shipment';
 
 @Component({
   selector: 'app-root',
@@ -6,4 +8,12 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+
+  shipments: Shipment[] = SHIPMENTS;
+  @Input() dataSource!: Shipment[];
+
+  addShipmentRecordToTable($event:Shipment){
+    console.log($event)
+    this.shipments = [...this.shipments, $event];
+  }
 }

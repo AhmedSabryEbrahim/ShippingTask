@@ -7,6 +7,6 @@ import { Shipment } from '../shipment';
   styleUrls: ['./shipment-item.component.css']
 })
 export class ShipmentItemComponent {
-  @Input()
-  shipment!: Shipment;
+  @Input() dataSource!: Shipment[];
+  displayedColumns: string[] = ['number', 'parcelSKU', 'description', 'streetAdress', 'country', 'town', 'deliveryDate'];
 }
