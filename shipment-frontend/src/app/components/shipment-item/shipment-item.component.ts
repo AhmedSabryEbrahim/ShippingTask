@@ -8,5 +8,5 @@ import { Shipment } from '../shipment';
 })
 export class ShipmentItemComponent {
   @Input() dataSource!: Shipment[];
-  displayedColumns: string[] = ['number', 'parcelSKU', 'description', 'streetAdress', 'country', 'town', 'deliveryDate'];
+  displayedColumns: string[] = ['parcelSKU', 'description', 'streetAdress', 'country', 'town', 'deliveryDate'];
 }
