@@ -16,12 +16,19 @@ export class AppComponent implements OnInit {
   constructor(private shipmentService:ShippmentService){}
 
   addShipmentRecordToTable($event: Shipment) {
+    this.addShipments($event);
     this.shipments = [...this.shipments, $event];
   }
 
   getShipments() {
     this.shipmentService.fetchAllShipments().subscribe((result)=>{
       this.shipments = result;
+    });
+  }
+
+  addShipments(newShipment:Shipment) {
+    this.shipmentService.addNewShipment(newShipment).subscribe((result)=>{
+      console.log(result);
     });
   }
 

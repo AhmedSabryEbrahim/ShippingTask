@@ -16,4 +16,8 @@ export class ShippmentService {
   fetchAllShipments() : Observable<Shipment[]> {
     return this.http.get<Shipment[]>(this.SHIPPMENT_API_URL);
   }
+
+  addNewShipment(newShipment:Shipment): Observable<any>{
+     return this.http.post(this.SHIPPMENT_API_URL, newShipment);
+  }
 }
