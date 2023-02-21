@@ -1,6 +1,5 @@
 
 export class Shipment{
-    id: number;
     parcelSKU: string;
     description: string;
     streetAdress: string;

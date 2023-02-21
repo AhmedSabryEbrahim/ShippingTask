@@ -16,8 +16,8 @@ export class ShipmentsController {
     }
 
     @Get(':id')
-    getShipmentId(@Param('id') id:number): Shipment{
-        return this.shipmentService.findById(id);
+    getShipmentId(@Param('sku') sku:String): Shipment{
+        return this.shipmentService.findBySKU(sku);
     }
 
     @Post()

@@ -1,18 +1,19 @@
 import { Injectable } from '@nestjs/common';
 import { Shipment } from './shipments.entity';
 import { ShipmentDto } from './shipment-dto';
+import { SHIPMENTS } from './mock-shipments';
 
 @Injectable()
 export class ShipmentsService {
 
-    private shipments: Shipment[] = [];
+    private shipments: Shipment[] = SHIPMENTS;
 
     findAllShipments(): Shipment[]{
         return this.shipments;
     }
 
-    findById(shipmentId: number): Shipment {
-        return this.shipments.find(shipment => { shipment.id === shipmentId});
+    findBySKU(sku: String): Shipment {
+        return this.shipments.find(shipment => { shipment.parcelSKU === sku});
     }
 
     createShipment(shipmentDto: ShipmentDto): Shipment{
