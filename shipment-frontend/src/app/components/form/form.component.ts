@@ -16,7 +16,6 @@ export class FormComponent implements OnInit{
 
   submitInfo(): void{
     const newShipment: Shipment = this.shipmentForm.value;
-    console.log(newShipment);
     this.submitEventEmitter.emit(newShipment);
     this.initShippmentForm();
   }
@@ -31,6 +30,7 @@ export class FormComponent implements OnInit{
       streetAdress:'',
       country: '',
       town: '',
+      description: '',
       deliveryDate: ''
     })
   }

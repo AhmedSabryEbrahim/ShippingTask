@@ -1,7 +1,33 @@
 version: '3.8'
 services:
-  frontend:
-    build: ./shipment-frontend
+
   backend:
     build:  ./shipment-service
-  db:
+    ports:
+     - 3000:3000
+    depends_on:
+    - mysql 
+
+  frontend:
+    build: ./shipment-frontend
+    ports:
+     - 8080:80
+    depends_on:
+     - backend
+
+  mysql:
+    image: mysql:5.7
+    restart: always
+    command: --init-file /data/application/init.sql
+    volumes:
+        - ./init.sql:/data/application/init.sql
+    environment:
+      DB_PORT: '3306'
+      MYSQL_DATABASE: 'dev'
+      MYSQL_USER: 'user'
+      MYSQL_PASSWORD: 'password'
+      MYSQL_ROOT_PASSWORD: 'password'
+    ports:
+      - '3306:3306'
+    expose:
+      - '3306'

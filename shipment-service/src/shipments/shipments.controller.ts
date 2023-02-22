@@ -11,17 +11,17 @@ export class ShipmentsController {
     constructor(private shipmentService: ShipmentsService){}
 
     @Get()
-    getAllShipments(): Shipment[]{
+    async getAllShipments(): Promise<Shipment[]>{
         return this.shipmentService.findAllShipments();
     }
 
-    @Get(':id')
-    getShipmentId(@Param('sku') sku:String): Shipment{
+    @Get(':sku')
+    getShipmentId(@Param('sku') sku:String): Promise<Shipment>{
         return this.shipmentService.findBySKU(sku);
     }
 
     @Post()
-    createShipment(@Body() shipmentDto:ShipmentDto): Shipment{
+    createShipment(@Body() shipmentDto:ShipmentDto): Promise<Shipment>{
         return this.shipmentService.createShipment(shipmentDto);
     }
 

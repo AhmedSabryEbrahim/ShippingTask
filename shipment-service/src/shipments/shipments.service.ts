@@ -1,24 +1,41 @@
 import { Injectable } from '@nestjs/common';
 import { Shipment } from './shipments.entity';
 import { ShipmentDto } from './shipment-dto';
-import { SHIPMENTS } from './mock-shipments';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
 
 @Injectable()
 export class ShipmentsService {
 
-    private shipments: Shipment[] = SHIPMENTS;
-
-    findAllShipments(): Shipment[]{
-        return this.shipments;
+    constructor(@InjectRepository(Shipment) private shipmentRepository: Repository<Shipment>) {
     }
 
-    findBySKU(sku: String): Shipment {
-        return this.shipments.find(shipment => { shipment.parcelSKU === sku});
+    findAllShipments(): Promise<Shipment[]> {
+        return this.shipmentRepository.find();
     }
 
-    createShipment(shipmentDto: ShipmentDto): Shipment{
-        const newShipment = {id: this.shipments.length + 1, ...shipmentDto};
-        this.shipments.push(newShipment);
+    async findBySKU(parcelSKU: String): Promise<Shipment | undefined> {
+        return this.shipmentRepository
+            .createQueryBuilder("user")
+            .where("user.username = :username", { parcelSKU: parcelSKU })
+            .getOne();
+    }
+
+    createShipment(shipmentDto: ShipmentDto): Promise<Shipment> {
+        return this.shipmentRepository.save(
+            this.shipmentRepository.create(this.mapShipmentDto(shipmentDto))
+        );
+    }
+
+    mapShipmentDto(shipmentDto: ShipmentDto): Shipment {
+        const newShipment: Shipment = {
+            parcelSKU: shipmentDto.parcelSKU,
+            streetAdress: shipmentDto.streetAdress,
+            description: shipmentDto.description,
+            country: shipmentDto.country,
+            town: shipmentDto.town,
+            deliveryDate: shipmentDto.deliveryDate
+        };
         return newShipment;
     }
 

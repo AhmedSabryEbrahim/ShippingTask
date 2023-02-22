@@ -1,6 +1,7 @@
 import { ApiProperty } from "@nestjs/swagger";
 
 export class ShipmentDto{
+
     @ApiProperty({default: '00422001', required: true})
     parcelSKU: string;
 

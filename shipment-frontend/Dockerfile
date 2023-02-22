@@ -1,13 +1,11 @@
-FROM node:alpine
+FROM node:alpine as builder
 
-WORKDIR /usr/src/app
-
-COPY package.json .
-COPY package-lock.json .
-
+COPY . /app
+WORKDIR /app
 RUN npm install
+RUN npm run build --prod
 
-COPY . .
 
-
-CMD /usr/src/app/node_modules/.bin/ng serve --host 0.0.0.0 --disableHostCheck
+FROM nginx:alpine
+EXPOSE 80
+COPY --from=builder /app/dist/shipment-frontend /usr/share/nginx/html
