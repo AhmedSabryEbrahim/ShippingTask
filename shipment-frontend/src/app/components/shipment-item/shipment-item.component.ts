@@ -1,6 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { Shipment } from '../shipment';
-
+import { Shipment } from 'src/app/models/shipment';
 @Component({
   selector: 'app-shipment-item',
   templateUrl: './shipment-item.component.html',
@@ -8,5 +7,5 @@ import { Shipment } from '../shipment';
 })
 export class ShipmentItemComponent {
   @Input() dataSource!: Shipment[];
-  displayedColumns: string[] = ['parcelSKU', 'description', 'streetAdress', 'country', 'town', 'deliveryDate'];
+  displayedColumns: string[] = ['parcelSKU', 'description', 'streetAdress', 'country', 'state', 'city', 'deliveryDate'];
 }

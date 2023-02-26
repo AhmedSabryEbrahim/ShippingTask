@@ -1,6 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
-import { Shipment } from '../shipment';
+import { FormControl, FormGroup } from '@angular/forms';
+import { Shipment } from 'src/app/models/shipment';
+import { CountrySelectorComponent } from '../country-selector/country-selector.component';
 
 @Component({
   selector: 'app-form',
@@ -11,13 +12,20 @@ export class FormComponent implements OnInit{
 
   @Output() shipmentForm!: FormGroup;
   @Output() submitEventEmitter = new EventEmitter<Shipment>();
-
-  constructor(private fb: FormBuilder){ }
+  locationForm: any;
 
   submitInfo(): void{
-    const newShipment: Shipment = this.shipmentForm.value;
-    this.submitEventEmitter.emit(newShipment);
+    this.submitEventEmitter.emit(this.buildShipmentObj());
     this.initShippmentForm();
+  }
+
+  buildShipmentObj(): Shipment{
+    this.shipmentForm.value.location = this.locationForm;
+    const newShipment: Shipment = this.shipmentForm.value;
+    newShipment.country = this.locationForm.country;
+    newShipment.state = this.locationForm.state;
+    newShipment.city = this.locationForm.city;
+    return newShipment;
   }
   
   ngOnInit(): void {
@@ -25,14 +33,20 @@ export class FormComponent implements OnInit{
   }
 
   initShippmentForm(){
-    this.shipmentForm = this.fb.group({
-      parcelSKU: '',
-      streetAdress:'',
-      country: '',
-      town: '',
-      description: '',
-      deliveryDate: ''
-    })
+    this.shipmentForm = new FormGroup({
+      parcelSKU: new FormControl(''),
+      streetAdress: new FormControl(''),
+      location: CountrySelectorComponent.locationFormInit(),
+      description: new FormControl(''),
+      deliveryDate: new FormControl('')
+    })  
   }
 
+  get locForm(): FormGroup {
+    return this.shipmentForm.get('location') as FormGroup;
+  }
+
+  formOnAction($event: any){
+    this.locationForm = $event;
+  }
 }

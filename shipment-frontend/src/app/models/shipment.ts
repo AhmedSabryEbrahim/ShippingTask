@@ -3,6 +3,7 @@ export interface Shipment{
     description: string;
     streetAdress: string;
     country: string;
-    town: string;
+    state: string;
+    city: string;
     deliveryDate: Date;
 }

@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { ButtonComponent } from './components/button/button.component';
 import { ShipmentItemComponent } from './components/shipment-item/shipment-item.component';
 import { FormComponent } from './components/form/form.component';
+import { CountrySelectorComponent } from './components/country-selector/country-selector.component';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {ReactiveFormsModule} from '@angular/forms'
@@ -30,13 +31,13 @@ import { MatSortModule } from '@angular/material/sort';
 import { HttpClientModule } from '@angular/common/http';
 
 
-
 @NgModule({
   declarations: [
     AppComponent,
     ButtonComponent,
     ShipmentItemComponent,
-    FormComponent
+    FormComponent,
+    CountrySelectorComponent
   ],
   imports: [
     BrowserModule,

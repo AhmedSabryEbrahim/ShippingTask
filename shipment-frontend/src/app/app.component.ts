@@ -1,7 +1,6 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, Input, OnInit } from '@angular/core';
-import { Shipment } from './components/shipment';
-import { ShippmentService } from './services/shippment.service';
+import { Shipment } from './models/shipment';
+import { ShippmentService } from './services/shipment-service/shippment.service';
 
 @Component({
   selector: 'app-root',
