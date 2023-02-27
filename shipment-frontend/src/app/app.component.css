@@ -1,0 +1,22 @@
+.search{
+    padding: 20px auto;
+    margin: 20px;
+}
+
+.add-button{
+    padding: 20px auto;
+    margin: 20px;
+}
+
+h1{
+    padding: 20px auto;
+    margin: 20px;
+    justify-content: space-evenly;
+    display:flex;
+    align-content: center;
+}
+
+app-shipment-item {
+width: 70%;
+margin: 20px auto;
+}
