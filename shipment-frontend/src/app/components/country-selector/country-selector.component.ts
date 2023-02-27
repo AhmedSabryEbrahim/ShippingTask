@@ -31,7 +31,7 @@ export class CountrySelectorComponent implements OnInit {
         'country': this.countryInfo[value.country].CountryName,
         'state': (value.state)? this.stateInfo[value.state].StateName : '',
         'city': (value.city)? this.cityInfo[value.city] : '',
-      };
+      }
       this.locationEventEmitter.emit(result);
     });
   }
@@ -67,10 +67,6 @@ export class CountrySelectorComponent implements OnInit {
     if (this.cityId) {
       this.cityInfo = this.cityInfo[this.cityId];
     }
-  }
-
-  initLocationForm() {
-    this.locationForm = CountrySelectorComponent.locationFormInit();
   }
 
   static locationFormInit(): FormGroup {

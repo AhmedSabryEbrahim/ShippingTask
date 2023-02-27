@@ -1,4 +1,4 @@
-<form class="ship_form" [formGroup]="shipmentForm" >
+<form class="ship_form" [formGroup]="shipmentForm">
     <h1>Shipping info</h1>
 
     <mat-form-field appearance="fill">
@@ -11,7 +11,7 @@
         <input matInput placeholder="streetAdress" formControlName="streetAdress">
     </mat-form-field>
 
-    <app-country-selector [locationForm]="locForm"  (locationEventEmitter)="formOnAction($event)"></app-country-selector>
+    <app-country-selector [locationForm]="locForm" (locationEventEmitter)="formOnAction($event)"></app-country-selector>
 
     <mat-form-field appearance="fill">
         <mat-label>Description</mat-label>

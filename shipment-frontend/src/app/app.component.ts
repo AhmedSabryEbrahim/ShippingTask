@@ -1,10 +1,9 @@
-import { AfterViewInit, Component, Input, OnInit } from '@angular/core';
+import { AfterViewInit, Component } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { FormComponent } from './components/form/form.component';
 import { Shipment } from './models/shipment';
 import { ShippmentService } from './services/shipment-service/shippment.service';
-import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-root',
@@ -14,13 +13,18 @@ import { filter } from 'rxjs/operators';
 export class AppComponent implements AfterViewInit {
 
   dataSource: MatTableDataSource<Shipment> = new MatTableDataSource<Shipment>();
-  matDialogRef! :MatDialogRef<any>;
-  constructor(private shipmentService: ShippmentService, private matDialog: MatDialog){}
+  matDialogRef!: MatDialogRef<any>;
+  countrySearchText: string= '';
+  descriptionSearchText: string = '';
 
-  openDialog(){
+  constructor(private shipmentService: ShippmentService, private matDialog: MatDialog) { }
+
+  openDialog() {
     this.matDialogRef = this.matDialog.open(FormComponent);
-    this.matDialogRef.afterClosed().subscribe((result)=>{
-      this.addShipmentRecordToTable(result);
+    this.matDialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        this.addShipmentRecordToTable(result);
+      }
     });
   }
 
@@ -28,7 +32,7 @@ export class AppComponent implements AfterViewInit {
     this.shipmentService.addNewShipment($event).subscribe((result) => {
       console.log(result);
       this.dataSource.data.push(result);
-      this.dataSource.data=[...this.dataSource.data]
+      this.dataSource.data = [...this.dataSource.data]
       this.dataSource._updateChangeSubscription();
     });
   }
@@ -42,4 +46,9 @@ export class AppComponent implements AfterViewInit {
   ngAfterViewInit() {
     this.getShipments();
   }
+
+  onCountrySearchChanged() {
+    this.dataSource.filter = this.countrySearchText.toLocaleLowerCase();
+  }
+
 }

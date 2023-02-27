@@ -2,7 +2,7 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Shipment } from 'src/app/models/shipment';
 import { CountrySelectorComponent } from '../country-selector/country-selector.component';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { MatDialogRef } from '@angular/material/dialog';
 
 
 @Component({
@@ -10,53 +10,53 @@ import { MatDialog, MatDialogRef } from '@angular/material/dialog';
   templateUrl: './form.component.html',
   styleUrls: ['./form.component.css']
 })
-export class FormComponent implements OnInit{
+export class FormComponent implements OnInit {
 
   @Output() shipmentForm!: FormGroup;
-  @Output() submitEventEmitter = new EventEmitter<Shipment>();
   locationForm: any;
 
-  constructor(
-    private dialogRef: MatDialogRef<any>){
-
-  }
+  constructor(private dialogRef: MatDialogRef<any>) { }
 
 
-  submitInfo(): void{
-   // this.submitEventEmitter.emit(this.buildShipmentObj());
-
+  submitInfo(): void {
     this.dialogRef.close(this.buildShipmentObj());
     this.initShippmentForm();
   }
 
-  buildShipmentObj(): Shipment{
+  buildShipmentObj(): Shipment {
     this.shipmentForm.value.location = this.locationForm;
     const newShipment: Shipment = this.shipmentForm.value;
-    newShipment.country = this.locationForm.country;
-    newShipment.state = this.locationForm.state;
-    newShipment.city = this.locationForm.city;
+    if (this.locationForm && this.locationForm.country
+      && this.locationForm.state && this.locationForm.city) {
+      newShipment.country = this.locationForm.country;
+      newShipment.state = this.locationForm.state;
+      newShipment.city = this.locationForm.city;
+    } else {
+      console.log("Location info (country, state, city) not correct!");
+    }
     return newShipment;
   }
-  
+
   ngOnInit(): void {
     this.initShippmentForm();
   }
 
-  initShippmentForm(){
+  initShippmentForm() {
     this.shipmentForm = new FormGroup({
       parcelSKU: new FormControl(''),
       streetAdress: new FormControl(''),
       location: CountrySelectorComponent.locationFormInit(),
       description: new FormControl(''),
       deliveryDate: new FormControl('')
-    })  
+    })
   }
 
   get locForm(): FormGroup {
     return this.shipmentForm.get('location') as FormGroup;
   }
 
-  formOnAction($event: any){
+  formOnAction($event: any) {
     this.locationForm = $event;
   }
+
 }

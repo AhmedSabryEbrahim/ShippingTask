@@ -23,6 +23,7 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule} from '@angular/material/core';
 import {MatTableModule} from '@angular/material/table';
 import {MatDialogModule} from '@angular/material/dialog';
+import { FormsModule } from '@angular/forms';
 
 import { MatSelectCountryModule } from "@angular-material-extensions/select-country";
 import { MatPaginatorModule } from '@angular/material/paginator';
@@ -61,6 +62,7 @@ import { HttpClientModule } from '@angular/common/http';
     MatSortModule,
     HttpClientModule,
     MatDialogModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
