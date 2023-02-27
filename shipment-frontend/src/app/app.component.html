@@ -1,4 +1,4 @@
 <div class="container">
-  <app-form (submitEventEmitter)="addShipmentRecordToTable($event)"></app-form>
-  <app-shipment-item [dataSource]="shipments"></app-shipment-item>
+  <button (click)="openDialog()">Add Shippment</button>
+  <app-shipment-item [dataSource]="dataSource"></app-shipment-item>
 </div>

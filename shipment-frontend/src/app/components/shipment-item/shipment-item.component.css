@@ -1,3 +1,4 @@
-.data-table {
-    width: 70px;
+.full-width-table {
+    width: 80%;
+    margin: 20px auto;
 }

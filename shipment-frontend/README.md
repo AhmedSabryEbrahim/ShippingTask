@@ -1,7 +1,7 @@
 # Bussniess Requirement
 As a user of the shipping application :
 
-1- I should be able to see the shipping form, which contains fields ['parcelSKU', 'description', 'streetAdress', 'country', 'town', 'deliveryDate'].
+1- I should be able to see the shipping form, which contains fields ['parcelSKU', 'description', 'streetAdress', 'country', 'state', 'city', 'deliveryDate'].
 
 2- I should be able to see the Table of Shipping information.
 

@@ -11,12 +11,14 @@ export class ShipmentDto{
     @ApiProperty({default: 'Old town - Tallinn', required: true})
     streetAdress: string;
 
-
     @ApiProperty({default: 'Estonia', required: true})
     country: string;
 
     @ApiProperty({default: 'Tallinn', required: true})
-    town: string;
+    state: string;
+
+    @ApiProperty({default: 'Tallinn', required: true})
+    city: string;
 
     @ApiProperty({default: '20/01/2023', required: true})
     deliveryDate: Date;

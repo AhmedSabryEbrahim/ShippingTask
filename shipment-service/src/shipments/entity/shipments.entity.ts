@@ -9,9 +9,11 @@ export class Shipment{
     @Column()
     streetAdress: string;
     @Column()
-    country: string;
+    country: string;    
     @Column()
-    town: string;
+    state: string;
+    @Column()
+    city: string;
     @Column()
     deliveryDate: Date;
 }

@@ -1,37 +1,45 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { AfterViewInit, Component, Input, OnInit } from '@angular/core';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { MatTableDataSource } from '@angular/material/table';
+import { FormComponent } from './components/form/form.component';
 import { Shipment } from './models/shipment';
 import { ShippmentService } from './services/shipment-service/shippment.service';
+import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements AfterViewInit {
 
-  shipments: Shipment[] = [];
-  @Input() dataSource!: Shipment[];
+  dataSource: MatTableDataSource<Shipment> = new MatTableDataSource<Shipment>();
+  matDialogRef! :MatDialogRef<any>;
+  constructor(private shipmentService: ShippmentService, private matDialog: MatDialog){}
 
-  constructor(private shipmentService:ShippmentService){}
+  openDialog(){
+    this.matDialogRef = this.matDialog.open(FormComponent);
+    this.matDialogRef.afterClosed().subscribe((result)=>{
+      this.addShipmentRecordToTable(result);
+    });
+  }
 
   addShipmentRecordToTable($event: Shipment) {
-    this.addShipments($event);
-    this.shipments = [...this.shipments, $event];
+    this.shipmentService.addNewShipment($event).subscribe((result) => {
+      console.log(result);
+      this.dataSource.data.push(result);
+      this.dataSource.data=[...this.dataSource.data]
+      this.dataSource._updateChangeSubscription();
+    });
   }
 
   getShipments() {
-    this.shipmentService.fetchAllShipments().subscribe((result)=>{
-      this.shipments = result;
+    this.shipmentService.fetchAllShipments().subscribe((result) => {
+      this.dataSource.data = result;
     });
   }
 
-  addShipments(newShipment:Shipment) {
-    this.shipmentService.addNewShipment(newShipment).subscribe((result)=>{
-      console.log(result);
-    });
-  }
-
-  ngOnInit(): void {
+  ngAfterViewInit() {
     this.getShipments();
   }
 }

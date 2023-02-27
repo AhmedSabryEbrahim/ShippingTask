@@ -2,6 +2,8 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Shipment } from 'src/app/models/shipment';
 import { CountrySelectorComponent } from '../country-selector/country-selector.component';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+
 
 @Component({
   selector: 'app-form',
@@ -14,8 +16,16 @@ export class FormComponent implements OnInit{
   @Output() submitEventEmitter = new EventEmitter<Shipment>();
   locationForm: any;
 
+  constructor(
+    private dialogRef: MatDialogRef<any>){
+
+  }
+
+
   submitInfo(): void{
-    this.submitEventEmitter.emit(this.buildShipmentObj());
+   // this.submitEventEmitter.emit(this.buildShipmentObj());
+
+    this.dialogRef.close(this.buildShipmentObj());
     this.initShippmentForm();
   }
 

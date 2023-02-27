@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
-import { Shipment } from './shipments.entity';
-import { ShipmentDto } from './shipment-dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
+import { Shipment } from '../entity/shipments.entity';
+import { ShipmentDto } from '../shipment-dto';
 
 @Injectable()
 export class ShipmentsService {
@@ -33,7 +33,8 @@ export class ShipmentsService {
             streetAdress: shipmentDto.streetAdress,
             description: shipmentDto.description,
             country: shipmentDto.country,
-            town: shipmentDto.town,
+            state: shipmentDto.state,
+            city: shipmentDto.city,
             deliveryDate: shipmentDto.deliveryDate
         };
         return newShipment;

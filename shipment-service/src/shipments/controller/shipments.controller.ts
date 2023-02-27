@@ -1,8 +1,8 @@
 import { Body, Controller, Get, Param, Post } from '@nestjs/common';
-import { Shipment } from './shipments.entity';
-import { ShipmentDto } from './shipment-dto';
-import {ShipmentsService} from './shipments.service';
 import { ApiTags } from '@nestjs/swagger';
+import { Shipment } from '../entity/shipments.entity';
+import { ShipmentsService } from '../service/shipments.service';
+import { ShipmentDto } from '../shipment-dto';
 
 @ApiTags('Shipments')
 @Controller('shipments')

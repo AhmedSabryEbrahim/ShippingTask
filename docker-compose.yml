@@ -1,6 +1,12 @@
 version: '3.8'
 services:
 
+  data_population:
+    build:  ./data-population
+    command: sh -c "sleep 50s ; python3 ./populate_script.py"
+    depends_on:
+      - backend
+
   backend:
     build:  ./shipment-service
     ports:

@@ -1,4 +1,4 @@
-import { Shipment } from "src/shipments/shipments.entity";
+import { Shipment } from "src/shipments/entity/shipments.entity";
 
 const entities = [Shipment];
 export {Shipment};

@@ -1,9 +1,9 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import config from 'src/config/ormconfig';
-import { ShipmentsController } from './shipments.controller';
-import { Shipment } from './shipments.entity';
-import { ShipmentsService } from './shipments.service';
+import { Shipment } from 'src/config/typeorm.entities';
+import { ShipmentsController } from './controller/shipments.controller';
+import { ShipmentsService } from './service/shipments.service';
 
 @Module({
   imports: [TypeOrmModule.forRoot(config), TypeOrmModule.forFeature([Shipment])],
