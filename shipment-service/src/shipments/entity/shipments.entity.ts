@@ -2,7 +2,7 @@ import { Column, Entity, PrimaryColumn } from "typeorm";
 
 @Entity()
 export class Shipment{
-    @PrimaryColumn()
+    @PrimaryColumn({ unique: true })
     parcelSKU: string;
     @Column()
     description: string;

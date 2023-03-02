@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { CountrySelectorService } from 'src/app/services/country-service/country-selector.service';
 
 @Component({
@@ -71,9 +71,9 @@ export class CountrySelectorComponent implements OnInit {
 
   static locationFormInit(): FormGroup {
     return new FormGroup({
-      country: new FormControl(''),
-      state: new FormControl(''),
-      city: new FormControl('')
+      country: new FormControl('', [Validators.required]),
+      state: new FormControl('', [Validators.required]),
+      city: new FormControl('', [Validators.required])
     });
   }
 

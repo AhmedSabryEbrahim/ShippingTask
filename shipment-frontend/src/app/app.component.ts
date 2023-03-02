@@ -14,8 +14,6 @@ export class AppComponent implements AfterViewInit {
 
   dataSource: MatTableDataSource<Shipment> = new MatTableDataSource<Shipment>();
   matDialogRef!: MatDialogRef<any>;
-  countrySearchText: string= '';
-  descriptionSearchText: string = '';
 
   constructor(private shipmentService: ShippmentService, private matDialog: MatDialog) { }
 
@@ -46,9 +44,4 @@ export class AppComponent implements AfterViewInit {
   ngAfterViewInit() {
     this.getShipments();
   }
-
-  onCountrySearchChanged() {
-    this.dataSource.filter = this.countrySearchText.toLocaleLowerCase();
-  }
-
 }

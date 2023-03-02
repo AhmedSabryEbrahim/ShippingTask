@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, ConflictException, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Shipment } from '../entity/shipments.entity';
@@ -16,15 +16,20 @@ export class ShipmentsService {
 
     async findBySKU(parcelSKU: String): Promise<Shipment | undefined> {
         return this.shipmentRepository
-            .createQueryBuilder("user")
-            .where("user.username = :username", { parcelSKU: parcelSKU })
+            .createQueryBuilder("shipment")
+            .where("shipment.parcelSKU = :parcelSKU", { parcelSKU: parcelSKU })
             .getOne();
     }
 
-    createShipment(shipmentDto: ShipmentDto): Promise<Shipment> {
-        return this.shipmentRepository.save(
-            this.shipmentRepository.create(this.mapShipmentDto(shipmentDto))
-        );
+    async createShipment(shipmentDto: ShipmentDto): Promise<Shipment> {
+        const shipment = await this.findBySKU(shipmentDto.parcelSKU);
+        if (!shipment) {
+            return this.shipmentRepository.save(
+                this.shipmentRepository.create(this.mapShipmentDto(shipmentDto))
+            );
+        }else{
+            throw new ConflictException("parcelSKU already exists!");
+        }
     }
 
     mapShipmentDto(shipmentDto: ShipmentDto): Shipment {
