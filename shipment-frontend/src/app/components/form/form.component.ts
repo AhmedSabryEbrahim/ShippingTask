@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Shipment } from 'src/app/models/shipment';
 import { CountrySelectorComponent } from '../country-selector/country-selector.component';
@@ -64,12 +64,14 @@ export class FormComponent implements OnInit {
 
 
   isValidateFormInput(): boolean {
-    const isValid = this.validateParcelSKUInput(this.shipmentForm.value.parcelSKU) &&
-      this.validateAddressInput(this.shipmentForm.value.address) &&
-      this.validateCountryInput(this.shipmentForm.value.country) &&
-      this.validateStateInput(this.shipmentForm.value.state) &&
-      this.validateCityInput(this.shipmentForm.value.city) &&
-      this.validateDelieveryDateInput(this.shipmentForm.value.deliveryDate);
+    const isValid = this.validateParcelSKUInput() &&
+      this.validateDescriptionInput() &&
+      this.validateAddressInput() &&
+      this.validateCountryInput() &&
+      this.validateStateInput() &&
+      this.validateCityInput() &&
+      this.validateDelieveryDateInput();
+    console.log("is valid ? ", isValid);
     return isValid;
 
   }
@@ -78,26 +80,40 @@ export class FormComponent implements OnInit {
     return 'You must enter a value';
   }
 
-  validateParcelSKUInput(parcelSKU: string): boolean {
-    return (this.shipmentForm.value.parcelSKU) ? true : false;
+  validateParcelSKUInput(): boolean {
+    const isValidParcelSKU = (this.shipmentForm.value.parcelSKU) ? true : false;
+    console.log("parcelSku ", this.shipmentForm.value.parcelSKU, " ", isValidParcelSKU);
+    return isValidParcelSKU;
   }
-  validateDescriptionInput(description: string): boolean {
-    return (this.shipmentForm.value.description) ? true : false;
+  validateDescriptionInput(): boolean {
+    const isValidDescription = (this.shipmentForm.value.description) ? true : false;
+    console.log("Description ", this.shipmentForm.value.description, " ", isValidDescription);
+    return isValidDescription;
   }
-  validateAddressInput(address: string): boolean {
-    return (address) ? true : false;
+  validateAddressInput(): boolean {
+    const isValidAddress = (this.shipmentForm.value.streetAdress) ? true : false;
+    console.log("Address ", this.shipmentForm.value.streetAdress, " ", isValidAddress);
+    return isValidAddress;
   }
-  validateCountryInput(country: string): boolean {
-    return (country) ? true : false;
+  validateCountryInput(): boolean {
+    const isValidCountry = (this.shipmentForm.value.country) ? true : false;
+    console.log("country ", this.shipmentForm.value.country, " ", isValidCountry);
+    return isValidCountry;
   }
-  validateStateInput(state: string): boolean {
-    return (state) ? true : false;
+  validateStateInput(): boolean {
+    const isValidState= (this.shipmentForm.value.state) ? true : false;
+    console.log("state ", this.shipmentForm.value.state, " ", isValidState);
+    return isValidState;
   }
-  validateCityInput(city: string): boolean {
-    return (city) ? true : false;
+  validateCityInput(): boolean {
+    const isValidCity= (this.shipmentForm.value.city) ? true : false;
+    console.log("city ", this.shipmentForm.value.city, " ", isValidCity);
+    return isValidCity;
   }
-  validateDelieveryDateInput(deliveryDate: string): boolean {
-    return (deliveryDate) ? true : false;
+  validateDelieveryDateInput(): boolean {
+    const isValidDate =  (this.shipmentForm.value.deliveryDate) ? true : false;
+    console.log("DelivaryDate ", this.shipmentForm.value.deliveryDate, " ", isValidDate);
+    return isValidDate;
   }
 
 }
