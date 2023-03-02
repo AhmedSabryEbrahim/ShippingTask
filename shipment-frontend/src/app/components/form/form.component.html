@@ -26,8 +26,13 @@
         <mat-datepicker #picker></mat-datepicker>
     </mat-form-field>
 
+
     <div class="form_buttons">
         <app-button color="primary" text="Submit" (btnClick)="submitInfo()"> </app-button>
+    </div>
+
+    <div >
+        <mat-error>{{submitErrors}}</mat-error>
     </div>
 
 </form>

@@ -13,11 +13,11 @@ export class ShippmentService {
 
   constructor(private http: HttpClient) { }
 
-  fetchAllShipments() : Observable<Shipment[]> {
+  fetchAllShipments(): Observable<Shipment[]> {
     return this.http.get<Shipment[]>(this.SHIPPMENT_API_URL);
   }
 
-  addNewShipment(newShipment:Shipment): Observable<any>{
-     return this.http.post(this.SHIPPMENT_API_URL, newShipment);
+  addNewShipment(newShipment: Shipment): Observable<any> {
+    return this.http.post(this.SHIPPMENT_API_URL, newShipment);
   }
 }

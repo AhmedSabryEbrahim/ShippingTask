@@ -27,12 +27,11 @@ export class AppComponent implements AfterViewInit {
   }
 
   addShipmentRecordToTable($event: Shipment) {
-    this.shipmentService.addNewShipment($event).subscribe((result) => {
-      console.log(result);
-      this.dataSource.data.push(result);
-      this.dataSource.data = [...this.dataSource.data]
-      this.dataSource._updateChangeSubscription();
-    });
+    
+    this.dataSource.data.push($event);
+    this.dataSource.data = [...this.dataSource.data]
+    this.dataSource._updateChangeSubscription();
+
   }
 
   getShipments() {
