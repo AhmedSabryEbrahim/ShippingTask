@@ -3,6 +3,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Shipment } from 'src/app/models/shipment';
+import { CdkColumnDef } from '@angular/cdk/table';
 
 @Component({
   selector: 'app-shipment-item',
@@ -15,6 +16,7 @@ export class ShipmentItemComponent implements OnInit, AfterViewInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
   @Input() dataSource!: MatTableDataSource<Shipment>;
+  countrySearchText: string= '';
 
   displayedColumns: string[] = ['parcelSKU', 'description', 'streetAdress', 'country', 'state', 'city', 'deliveryDate'];
 
@@ -24,6 +26,11 @@ export class ShipmentItemComponent implements OnInit, AfterViewInit {
   }
   ngOnInit() {
     this.dataSource._updateChangeSubscription();
+  }
+
+  onCountrySearchChanged() {
+     console.log(this.countrySearchText);
+     this.dataSource.filter = this.countrySearchText.toLocaleLowerCase();
   }
 
 }

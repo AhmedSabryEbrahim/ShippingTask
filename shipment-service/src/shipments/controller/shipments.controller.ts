@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, UsePipes, ValidationPipe } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { Shipment } from '../entity/shipments.entity';
 import { ShipmentsService } from '../service/shipments.service';
@@ -11,7 +11,7 @@ export class ShipmentsController {
     constructor(private shipmentService: ShipmentsService){}
 
     @Get()
-    async getAllShipments(): Promise<Shipment[]>{
+    getAllShipments(): Promise<Shipment[]>{
         return this.shipmentService.findAllShipments();
     }
 
@@ -21,6 +21,7 @@ export class ShipmentsController {
     }
 
     @Post()
+    @UsePipes(ValidationPipe)
     createShipment(@Body() shipmentDto:ShipmentDto): Promise<Shipment>{
         return this.shipmentService.createShipment(shipmentDto);
     }

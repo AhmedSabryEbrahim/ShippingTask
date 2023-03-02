@@ -6,12 +6,6 @@
     <button mat-raised-button color="primary" (click)="openDialog()">ADD SHIPPMENT</button>
   </div>
 
-  <div class="search">
-    <mat-form-field class="search-form-field">
-      <mat-label>Filter</mat-label>
-      <input matInput type="text" [(ngModel)]="countrySearchText" (input)="onCountrySearchChanged()">
-    </mat-form-field>
-
-
+  <div class="search"> 
     <app-shipment-item [dataSource]="dataSource"></app-shipment-item>
   </div>

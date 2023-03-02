@@ -28,18 +28,43 @@ describe('ShipmentsController', () => {
     deliveryDate: new Date('20/01/2023')
   }];
 
+  const mockShipmentService = {
+    createShipment: jest.fn(dto => {
+      return shipmentObj;
+    }),
+    findBySKU: jest.fn(str => {
+      return shipmentObj;
+    }),
+    findAllShipments: jest.fn(str => {
+      return [...shipmentObj];
+    }),
+  }
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       controllers: [ShipmentsController],
       providers: [ShipmentsService,],
-    }).compile();
+    })
+    .overrideProvider(ShipmentsService)
+    .useValue(mockShipmentService)
+    .compile();
 
     controller = module.get<ShipmentsController>(ShipmentsController);
   });
 
-  it('should be defined', () => {
-    controller.createShipment(shipmentDto);
-    expect(controller.getAllShipments()).toEqual(shipmentObj);
+  it('it should create shipment', ()=>{
+    expect(controller.createShipment(shipmentDto))
+    .toEqual(shipmentObj);
   });
+
+  it('it should return shipment with sku', ()=>{
+    expect(controller.getShipmentId("00422001"))
+    .toEqual(shipmentObj);
+  });
+
+  it('it should return shipment with sku', ()=>{
+    expect(controller.getAllShipments())
+    .toEqual([...shipmentObj]);
+  });
+
 });
